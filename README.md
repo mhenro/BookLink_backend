@@ -1,0 +1,1 @@
+Test project for learning Java EE, Java 8 features and RESTful webservices.
