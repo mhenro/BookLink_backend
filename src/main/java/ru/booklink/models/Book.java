@@ -24,7 +24,7 @@ public class Book implements Serializable {
 	private List<Comment> comments;
 	private String annotation;
 	private String text;
-	private int likes;
+	private Integer likes;
 	private LocalDate lastUpdate;
 	private LocalDate created;
 	private Style style;
@@ -34,9 +34,17 @@ public class Book implements Serializable {
 
 	}
 
-	public Book(String name, String author) {
+	/* constructor for creating short book descriptions for lists */
+	public Book(Integer bookId, String name, String author, String annotation, Integer likes, LocalDate lastUpdate,
+			Style style, Genre genre) {
+		this.bookId = bookId;
 		this.name = name;
 		this.author = author;
+		this.annotation = annotation;
+		this.likes = likes;
+		this.lastUpdate = lastUpdate;
+		this.style = style;
+		this.genre = genre;
 	}
 
 	@Id
@@ -97,11 +105,11 @@ public class Book implements Serializable {
 		this.text = text;
 	}
 
-	public int getLikes() {
+	public Integer getLikes() {
 		return likes;
 	}
 
-	public void setLikes(int likes) {
+	public void setLikes(Integer likes) {
 		this.likes = likes;
 	}
 

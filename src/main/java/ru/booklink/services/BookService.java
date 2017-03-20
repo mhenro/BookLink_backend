@@ -31,9 +31,12 @@ public class BookService implements IBookService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Book> getBooks(int startPosition, int maxResults, String sortFields, String sortDirections) {
-		Query q = em.createQuery("SELECT b FROM Book b ORDER BY " + sortFields + " " + sortDirections);
+		Query q = em.createQuery(
+				"SELECT new Book(bookId, name, author, annotation, likes, lastUpdate, style, genre) FROM Book ORDER BY "
+						+ sortFields + " " + sortDirections);
 		q.setFirstResult(startPosition);
 		q.setMaxResults(maxResults);
+
 		return q.getResultList();
 	}
 
@@ -54,6 +57,14 @@ public class BookService implements IBookService {
 	@Override
 	public Optional<Book> getBookById(int id) {
 		return Optional.ofNullable(em.find(Book.class, id));
+	}
+
+	@Override
+	public String getTextOfBook(int id) {
+		Optional<Book> book = getBookById(id);
+		String text = book.map(b -> b.getText()).orElse("Error 404: Unfortunately, book is not found :(");
+
+		return text;
 	}
 
 	@Override

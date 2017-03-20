@@ -15,6 +15,8 @@ public interface IBookService {
 
 	public Optional<Book> getBookById(int id);
 
+	public String getTextOfBook(int id);
+
 	public Book saveBook(Book book);
 
 	public void deleteBook(Book book);
