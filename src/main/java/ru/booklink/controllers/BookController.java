@@ -21,6 +21,7 @@ import ru.booklink.models.Book;
 import ru.booklink.models.JsonOb;
 import ru.booklink.models.PaginatedWrapper;
 import ru.booklink.services.IBookService;
+import ru.booklink.utils.Secured;
 
 @Path("/BookController")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -100,6 +101,7 @@ public class BookController {
 	// ======================================TEST=========================
 
 	@GET
+	@Secured
 	@Path("/getJson")
 	@Produces(MediaType.APPLICATION_JSON)
 	public JsonOb getJson() {
