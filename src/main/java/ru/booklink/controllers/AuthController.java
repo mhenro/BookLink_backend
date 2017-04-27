@@ -42,7 +42,7 @@ public class AuthController {
 			return Response.ok(TextPacket.of(token)).build();
 		} catch (Exception e) {
 			HelperError error = new HelperError();
-			error.message = "Wrong credentials!";
+			error.message = "wrong credentials";
 			return Response.status(Response.Status.UNAUTHORIZED).entity(TextPacket.of(error)).build();
 		}
 	}

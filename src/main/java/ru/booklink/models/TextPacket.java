@@ -18,6 +18,15 @@ public class TextPacket {
 		return result;
 	}
 
+	public static TextPacket of(Exception e) {
+		TextPacket result = new TextPacket();
+		HelperError error = new HelperError();
+		error.message = e.getMessage();
+		result.setError(error);
+
+		return result;
+	}
+
 	/* setters and getters */
 	public String getMessage() {
 		return message;
