@@ -14,9 +14,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -95,4 +98,12 @@ public class RegistrationController {
 			throw new RegistrationFailException("can't send the activation details to client's email");
 		}
 	}
+
+	/* function for completing registration */
+	@GET
+	public String finishRegistration(@DefaultValue("") @QueryParam("key") String key) {
+
+		return null;
+	}
+
 }

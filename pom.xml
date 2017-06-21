@@ -81,6 +81,11 @@
 	    <version>2.9.0.pr1</version>
 	</dependency>
 	<dependency>
+	    <groupId>com.nimbusds</groupId>
+	    <artifactId>srp6a</artifactId>
+	    <version>1.4.1</version>
+	</dependency>
+	<dependency>
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
 	    <version>1.4</version>

@@ -1,8 +1,5 @@
 package ru.booklink.controllers;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -17,18 +14,22 @@ import ru.booklink.models.HelperError;
 import ru.booklink.models.TextPacket;
 import ru.booklink.services.IAuthorService;
 import ru.booklink.utils.ActiveUsers;
+import ru.booklink.utils.ITokenGenerator;
 
 @Path("/auth")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthController {
-	private SecureRandom random = new SecureRandom();
+	private final int TOKEN_LENGTH = 130;
 
 	@Inject
 	IAuthorService authorService;
 
 	@Inject
 	ActiveUsers activeUsers;
+
+	@Inject
+	ITokenGenerator tokenGenerator;
 
 	@POST
 	public Response authUser(Auth auth) {
@@ -55,7 +56,7 @@ public class AuthController {
 	}
 
 	private String issueToken(String username) {
-		String newToken = new BigInteger(130, random).toString(32);
+		String newToken = tokenGenerator.issueToken(TOKEN_LENGTH);
 		activeUsers.saveAuthor(newToken, authorService.getAuthorByLogin(username).orElse(null));
 
 		return newToken;
