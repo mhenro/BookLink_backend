@@ -32,7 +32,7 @@ public class BookService implements IBookService {
 	@Override
 	public List<Book> getBooks(int startPosition, int maxResults, String sortFields, String sortDirections) {
 		Query q = em.createQuery(
-				"SELECT new Book(bookId, name, author, annotation, likes, lastUpdate, style, genre) FROM Book ORDER BY "
+				"SELECT new Book(b.bookId, b.name, b.annotation, b.likes, b.lastUpdate, b.style, b.genre, b.author) FROM Book b  ORDER BY b."
 						+ sortFields + " " + sortDirections);
 		q.setFirstResult(startPosition);
 		q.setMaxResults(maxResults);

@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,7 +22,7 @@ public class Book implements Serializable {
 	private static final long serialVersionUID = -8094831815485063053L;
 	private Integer bookId;
 	private String name;
-	private String author;
+	private Author author;
 	private List<Comment> comments;
 	private String annotation;
 	private String text;
@@ -35,16 +37,16 @@ public class Book implements Serializable {
 	}
 
 	/* constructor for creating short book descriptions for lists */
-	public Book(Integer bookId, String name, String author, String annotation, Integer likes, LocalDate lastUpdate,
-			Style style, Genre genre) {
+	public Book(Integer bookId, String name, String annotation, Integer likes, LocalDate lastUpdate, Style style,
+			Genre genre, Author author) {
 		this.bookId = bookId;
 		this.name = name;
-		this.author = author;
 		this.annotation = annotation;
 		this.likes = likes;
 		this.lastUpdate = lastUpdate;
 		this.style = style;
 		this.genre = genre;
+		this.author = author;
 	}
 
 	@Id
@@ -67,12 +69,13 @@ public class Book implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "author", nullable = false, length = 100)
-	public String getAuthor() {
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "author_id", nullable = false)
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 

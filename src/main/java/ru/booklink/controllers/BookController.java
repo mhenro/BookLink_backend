@@ -49,7 +49,7 @@ public class BookController {
 			wrapper.setPageSize(pageSize);
 			return bookService.getBooks(wrapper);
 		} catch (Exception e) {
-			log.severe(e.toString());
+			log.log(java.util.logging.Level.SEVERE, "Error while fetching the books: ", e);
 		}
 		return null;
 	}
